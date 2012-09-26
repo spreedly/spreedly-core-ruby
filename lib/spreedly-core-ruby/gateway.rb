@@ -56,6 +56,14 @@ module SpreedlyCore
       end
     end
 
+    def self.redact(token)
+      opts = { :body => '' }
+
+      verify_put("/gateways/#{gateway_options[:token]}/redact.xml", opts) do |response|
+        return new response.parsed_response["gateway"]
+      end
+    end
+
     def initialize(attrs={})
       attrs.merge!(attrs.delete("characteristics") || {})
       super(attrs)
