@@ -30,7 +30,7 @@ module SpreedlyCore
     def test_redact_succeeds_for_test
       assert_nothing_raised InvalidResponse do
         token = Gateway.create(:gateway_type => 'test').token
-        Gateway.redact(token)
+        Gateway.redact(:token => token)
       end
     end
   end
