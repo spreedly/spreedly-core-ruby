@@ -43,6 +43,19 @@ module SpreedlyCore
       end
     end
 
+    def self.update(gateway_options)
+      raise ArgumentError.new("gateway_options must be a hash") unless gateway_options.is_a?(Hash)
+      
+      opts = {
+        :headers => {"Content-Type" => "application/xml"},
+        :body => gateway_options.to_xml(:root => :gateway, :dasherize => false),
+      }
+
+      verify_put("/gateways/#{gateway_options[:token]}.xml", opts) do |response|
+        return new response.parsed_response["gateway"]
+      end
+    end
+
     def initialize(attrs={})
       attrs.merge!(attrs.delete("characteristics") || {})
       super(attrs)
