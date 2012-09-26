@@ -56,10 +56,10 @@ module SpreedlyCore
       end
     end
 
-    def self.redact(token)
+    def self.redact(gateway_options)
       opts = { :body => '' }
 
-      verify_put("/gateways/#{token}/redact.xml", opts) do |response|
+      verify_put("/gateways/#{gateway_options[:token]}/redact.xml", opts) do |response|
         return new response.parsed_response["gateway"]
       end
     end
