@@ -3,7 +3,8 @@ module SpreedlyCore
   class Transaction < Base
     attr_reader(:amount, :on_test_gateway, :created_at, :updated_at, :currency_code,
                 :succeeded, :token, :message, :transaction_type, :gateway_token,
-                :response, :signed, :state, :checkout_url)
+                :response, :signed, :state, :checkout_url, 
+                :order_id, :description, :merchant_name_descriptor, :merchant_location_descriptor)
     alias :succeeded? :succeeded
 
     # Breaks enacapsulation a bit, but allow subclasses to register the 'transaction_type'
