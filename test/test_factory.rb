@@ -7,13 +7,25 @@ module SpreedlyCore
       payment_method
     end
   
-    def given_a_purchase(purchase_amount=100, ip_address='127.0.0.1')
+    def given_a_purchase(purchase_amount=100, ip_address='127.0.0.1', additional_options={})
+      default_additional_options = {:order_id => "123", :description => 'purchase description', :merchant_name_descriptor => 'merchant name', :merchant_location_descriptor => 'merchant location'}
+      options = default_additional_options.merge(additional_options)
+      options[:ip_address] = ip_address
+
       payment_method = given_a_payment_method
-      assert transaction = payment_method.purchase(purchase_amount, nil, nil, ip_address=nil)
+
+      assert transaction = payment_method.purchase(purchase_amount, options)
       assert_equal purchase_amount, transaction.amount
       assert_equal "USD", transaction.currency_code
       assert_equal "Purchase", transaction.transaction_type
-      assert_equal ip_address, transaction.ip
+      assert_equal options[:ip_address], transaction.ip
+      assert_equal options[:order_id], transaction.order_id
+      assert_equal options[:description], transaction.description
+      assert_equal options[:merchant_name_descriptor], transaction.merchant_name_descriptor
+      assert_equal options[:merchant_location_descriptor], transaction.merchant_location_descriptor
+
+
+
       assert transaction.succeeded?
       transaction
     end

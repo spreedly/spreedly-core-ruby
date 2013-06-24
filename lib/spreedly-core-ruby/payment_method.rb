@@ -128,6 +128,10 @@ module SpreedlyCore
           :amount => amount,
           :currency_code => currency,
           :ip => options[:ip_address],
+          :order_id => options[:order_id],
+          :description => options[:description],
+          :merchant_name_descriptor => options[:merchant_name_descriptor],
+          :merchant_location_descriptor => options[:merchant_location_descriptor], 
           :redirect_url => options[:redirect_url],
           :callback_url => options[:callback_url]
         }
