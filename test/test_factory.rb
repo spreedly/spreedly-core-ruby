@@ -9,7 +9,7 @@ module SpreedlyCore
   
     def given_a_purchase(purchase_amount=100, ip_address='127.0.0.1')
       payment_method = given_a_payment_method
-      assert transaction = payment_method.purchase(purchase_amount, nil, nil, ip_address=nil)
+      assert transaction = payment_method.purchase(purchase_amount, nil, nil, ip_address)
       assert_equal purchase_amount, transaction.amount
       assert_equal "USD", transaction.currency_code
       assert_equal "Purchase", transaction.transaction_type
