@@ -19,5 +19,19 @@ module SpreedlyCore
         Gateway.create(:gateway_type => 'test')
       end
     end
+
+    def test_update_succeeds_for_test
+      assert_nothing_raised InvalidResponse do
+        token = Gateway.create(:gateway_type => 'test').token
+        Gateway.update(:token => token, :login => 'foo')
+      end
+    end
+
+    def test_redact_succeeds_for_test
+      assert_nothing_raised InvalidResponse do
+        token = Gateway.create(:gateway_type => 'test').token
+        Gateway.redact(:token => token)
+      end
+    end
   end
 end
